@@ -3,6 +3,7 @@ import re
 import requests
 import sys
 import time
+from datetime import datetime, timezone
 from enum import Enum, auto
 from typing import Any
 
@@ -75,15 +76,26 @@ def determineConsoleConfiguration(consoleArgument: str) -> ConsoleConfiguration:
         raise ValueError(f'The given consoleArgument value has no matching ConsoleConfiguration: \"{consoleArgument}\"')
 
 def setHdmiMatrixConfiguration(configuration: ConsoleConfiguration):
-    portString = f'11111{configuration.hdmiPort}{configuration.hdmiPort}{configuration.hdmiPort}'
-    randomNumber = random.random()
-    hdmiMatrixUrl = f'http://{HDMI_MATRIX_IP}/@PORTAll={portString}.{randomNumber}'
+    ports: list[int] = [ 6, 7, 8 ]
 
     try:
-        response = requests.get(url = hdmiMatrixUrl)
-        print(f"HDMI Matrix response: {response}")
+        for port in ports:
+            randomNumber = random.random()
+            hdmiMatrixUrl = f'http://{HDMI_MATRIX_IP}/@PORT{port}={configuration.hdmiPort}.{randomNumber}'
+            now = datetime.now(timezone.utc)
+
+            cookies: dict[str, Any] = {
+                'State': f'1,{now.hour}:{now.minute}:{now.second}'
+            }
+
+            response = requests.get(
+                url = hdmiMatrixUrl,
+                cookies = cookies
+            )
+
+            print(f"HDMI Matrix response (port {port}): {response}")
     except Exception as e:
-        print(f"HDMI Matrix connection error ({HDMI_MATRIX_IP=}) ({configuration=}) ({portString=}) ({hdmiMatrixUrl=}):", e)
+        print(f"HDMI Matrix connection error ({HDMI_MATRIX_IP=}) ({configuration=}):", e)
 
 def setVgaMatrixConfiguration(configuration: ConsoleConfiguration):
     extronCommand = f'{configuration.extronPreset}.'
