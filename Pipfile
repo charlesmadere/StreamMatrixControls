@@ -5,6 +5,7 @@ name = "pypi"
 
 [packages]
 pyserial = "3.5"
+requests = "2.32.3"
 
 [dev-packages]
 

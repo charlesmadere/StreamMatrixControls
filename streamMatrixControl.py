@@ -1,10 +1,14 @@
+import random
 import re
+import requests
 import sys
 import time
 from enum import Enum, auto
 from typing import Any
 
 import serial
+
+HDMI_MATRIX_IP = "192.168.1.7"
 
 # the Extron MVX 84 VGA uses a baud rate of 9600
 BAUD_RATE = 9600
@@ -71,8 +75,15 @@ def determineConsoleConfiguration(consoleArgument: str) -> ConsoleConfiguration:
         raise ValueError(f'The given consoleArgument value has no matching ConsoleConfiguration: \"{consoleArgument}\"')
 
 def setHdmiMatrixConfiguration(configuration: ConsoleConfiguration):
-    # TODO
-    pass
+    portString = f'11111{configuration.hdmiPort}{configuration.hdmiPort}{configuration.hdmiPort}'
+    randomNumber = random.random()
+    hdmiMatrixUrl = f'http://{HDMI_MATRIX_IP}/@PORTAll={portString}.{randomNumber}'
+
+    try:
+        response = requests.get(url = hdmiMatrixUrl)
+        print(f"HDMI Matrix response: {response}")
+    except Exception as e:
+        print(f"HDMI Matrix connection error ({HDMI_MATRIX_IP=}) ({configuration=}) ({portString=}) ({hdmiMatrixUrl=}):", e)
 
 def setVgaMatrixConfiguration(configuration: ConsoleConfiguration):
     extronCommand = f'{configuration.extronPreset}.'
@@ -82,9 +93,9 @@ def setVgaMatrixConfiguration(configuration: ConsoleConfiguration):
             ser.write(extronCommand.encode("utf-8") + b'\r') # Append carriage return
             time.sleep(0.2) # Wait for the device to process
             response = ser.read(100) # Read up to 100 bytes
-            print("Response:", response.decode('utf-8', errors = 'ignore'))
+            print("Extron response:", response.decode('utf-8', errors = 'ignore'))
     except serial.SerialException as e:
-        print(f"Serial connection error ({COM_PORT=}) ({BAUD_RATE=}) ({configuration=}) ({extronCommand=}):", e)
+        print(f"Extron connection error ({COM_PORT=}) ({BAUD_RATE=}) ({configuration=}) ({extronCommand=}):", e)
 
 if __name__ == "__main__":
     arguments: list[str] | Any | None = sys.argv
