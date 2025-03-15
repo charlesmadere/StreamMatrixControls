@@ -88,7 +88,6 @@ def setVgaMatrixConfiguration(configuration: ConsoleConfiguration):
 
 if __name__ == "__main__":
     arguments: list[str] | Any | None = sys.argv
-    presetNumber: int
 
     if not isinstance(arguments, list) or len(arguments) < 2:
         raise RuntimeError(f"Preset number argument was not set ({arguments=})")
