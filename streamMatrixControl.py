@@ -90,7 +90,7 @@ if __name__ == "__main__":
     arguments: list[str] | Any | None = sys.argv
 
     if not isinstance(arguments, list) or len(arguments) < 2:
-        raise RuntimeError(f"Preset number argument was not set ({arguments=})")
+        raise RuntimeError(f"Console configuration argument is not set ({arguments=})")
 
     consoleArgument: str | Any | None = arguments[1]
 
