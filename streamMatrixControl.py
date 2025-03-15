@@ -84,7 +84,7 @@ def setVgaMatrixConfiguration(configuration: ConsoleConfiguration):
             response = ser.read(100) # Read up to 100 bytes
             print("Response:", response.decode('utf-8', errors = 'ignore'))
     except serial.SerialException as e:
-        print("Serial connection error:", e)
+        print(f"Serial connection error ({COM_PORT=}) ({BAUD_RATE=}) ({configuration=}) ({extronCommand=}):", e)
 
 if __name__ == "__main__":
     arguments: list[str] | Any | None = sys.argv
