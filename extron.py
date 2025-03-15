@@ -99,4 +99,5 @@ if __name__ == "__main__":
         raise RuntimeError(f"Console configuration argument is malformed ({consoleArgument=}) ({arguments=})")
 
     consoleConfiguration = determineConsoleConfiguration(consoleArgument)
+    setHdmiMatrixConfiguration(consoleConfiguration)
     setVgaMatrixConfiguration(consoleConfiguration)
