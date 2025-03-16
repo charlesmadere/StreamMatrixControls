@@ -68,6 +68,7 @@ def setHdmiMatrixConfiguration(configuration: ConsoleConfiguration):
             time.sleep(SLEEP_DURATION) # Wait for the device to process
     except Exception as e:
         print(f"HDMI Matrix connection error ({HDMI_MATRIX_ADDRESS=}) ({configuration=}):", e)
+        raise e
 
 def setVgaMatrixConfiguration(configuration: ConsoleConfiguration):
     extronCommand = f'{configuration.extronPreset}.'
@@ -80,12 +81,20 @@ def setVgaMatrixConfiguration(configuration: ConsoleConfiguration):
             print("Extron response:", response.decode('utf-8', errors = 'ignore'))
     except serial.SerialException as e:
         print(f"Extron connection error ({COM_PORT=}) ({BAUD_RATE=}) ({configuration=}) ({extronCommand=}):", e)
+        raise e
 
-def applyConsoleConfiguration(configuration: ConsoleConfiguration):
+def applyConsoleConfiguration(configuration: ConsoleConfiguration) -> bool:
     print(f'Applying console configuration: \"{configuration}\"')
-    setHdmiMatrixConfiguration(configuration)
-    setVgaMatrixConfiguration(configuration)
+
+    try:
+        setHdmiMatrixConfiguration(configuration)
+        setVgaMatrixConfiguration(configuration)
+    except Exception as e:
+        print(f"Encountered error during configuration ({configuration=}):", e)
+        return False
+
     print(f'Finished applying console configuration: \"{configuration}\"')
+    return True
 
 if __name__ == "__main__":
     arguments: list[str] | Any | None = sys.argv
