@@ -50,7 +50,7 @@ class ConsoleConfiguration(Enum):
             case ConsoleConfiguration.SUPER_FAMICOM: return 1
             case _: raise ValueError(f'Unknown ConsoleConfiguration value: \"{self}\"')
 
-def determineConsoleConfiguration(consoleArgument: str) -> ConsoleConfiguration:
+def determineConsoleConfiguration(consoleArgument: str) -> ConsoleConfiguration | None:
     if re.fullmatch(r'^\s*game(?:\s+|_|-)?cube\s*$', consoleArgument, re.IGNORECASE):
         return ConsoleConfiguration.GAME_CUBE
 
@@ -73,7 +73,7 @@ def determineConsoleConfiguration(consoleArgument: str) -> ConsoleConfiguration:
         return ConsoleConfiguration.SUPER_FAMICOM
 
     else:
-        raise ValueError(f'The given consoleArgument value has no matching ConsoleConfiguration: \"{consoleArgument}\"')
+        return None
 
 def setHdmiMatrixConfiguration(configuration: ConsoleConfiguration):
     ports: list[int] = [ 6, 7, 8 ]
@@ -121,5 +121,9 @@ if __name__ == "__main__":
         raise RuntimeError(f"Console configuration argument is malformed ({consoleArgument=}) ({arguments=})")
 
     consoleConfiguration = determineConsoleConfiguration(consoleArgument)
+
+    if consoleConfiguration is None:
+        raise RuntimeError(f'Console configuration argument doesn\'t match any console ({consoleArgument=}) ({arguments=})')
+
     setHdmiMatrixConfiguration(consoleConfiguration)
     setVgaMatrixConfiguration(consoleConfiguration)
