@@ -119,7 +119,7 @@ if __name__ == "__main__":
     if not isinstance(arguments, list) or len(arguments) < 2:
         raise RuntimeError(f"Console configuration argument is not set ({arguments=})")
 
-    consoleArgument: str | Any | None = arguments[1]
+    consoleArgument: str | Any | None = ' '.join(arguments[1:]).strip()
 
     if not isinstance(consoleArgument, str) or len(consoleArgument) == 0 or consoleArgument.isspace():
         raise RuntimeError(f"Console configuration argument is malformed ({consoleArgument=}) ({arguments=})")
