@@ -17,6 +17,9 @@ BAUD_RATE = 9600
 # the Extron MVX 84 VGA is currently using COM4 on my system
 COM_PORT = "COM4"
 
+# small amount of buffer time to allow external devices to process
+SLEEP_DURATION = 0.2
+
 class ConsoleConfiguration(Enum):
     GAME_CUBE = auto()
     MEGA_SG = auto()
@@ -94,6 +97,7 @@ def setHdmiMatrixConfiguration(configuration: ConsoleConfiguration):
             )
 
             print(f"HDMI Matrix response (port {port}): {response}")
+            time.sleep(SLEEP_DURATION) # Wait for the device to process
     except Exception as e:
         print(f"HDMI Matrix connection error ({HDMI_MATRIX_IP=}) ({configuration=}):", e)
 
@@ -103,7 +107,7 @@ def setVgaMatrixConfiguration(configuration: ConsoleConfiguration):
     try:
         with serial.Serial(COM_PORT, BAUD_RATE, timeout = 1) as ser:
             ser.write(extronCommand.encode("utf-8") + b'\r') # Append carriage return
-            time.sleep(0.2) # Wait for the device to process
+            time.sleep(SLEEP_DURATION) # Wait for the device to process
             response = ser.read(100) # Read up to 100 bytes
             print("Extron response:", response.decode('utf-8', errors = 'ignore'))
     except serial.SerialException as e:
