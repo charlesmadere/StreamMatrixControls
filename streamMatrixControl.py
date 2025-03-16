@@ -1,13 +1,14 @@
 import random
 import re
-import requests
 import sys
 import time
 from datetime import datetime, timezone
-from enum import Enum, auto
 from typing import Any
 
+import requests
 import serial
+
+from consoleConfiguration import ConsoleConfiguration
 
 HDMI_MATRIX_ADDRESS = "http://192.168.1.7"
 
@@ -19,39 +20,6 @@ COM_PORT = "COM4"
 
 # small amount of buffer time to allow external devices to process
 SLEEP_DURATION = 0.2
-
-class ConsoleConfiguration(Enum):
-    GAME_CUBE = auto()
-    MEGA_SG = auto()
-    NINTENDO_64 = auto()
-    NT_MINI_NOIR = auto()
-    SONY_PS1 = auto()
-    SONY_PS3 = auto()
-    SUPER_FAMICOM = auto()
-
-    @property
-    def extronPreset(self) -> int:
-        match self:
-            case ConsoleConfiguration.GAME_CUBE: return 6
-            case ConsoleConfiguration.MEGA_SG: return 2
-            case ConsoleConfiguration.NINTENDO_64: return 5
-            case ConsoleConfiguration.NT_MINI_NOIR: return 1
-            case ConsoleConfiguration.SONY_PS1: return 4
-            case ConsoleConfiguration.SONY_PS3: return 7
-            case ConsoleConfiguration.SUPER_FAMICOM: return 3
-            case _: raise ValueError(f'Unknown ConsoleConfiguration value: \"{self}\"')
-
-    @property
-    def hdmiPort(self) -> int:
-        match self:
-            case ConsoleConfiguration.GAME_CUBE: return 5
-            case ConsoleConfiguration.MEGA_SG: return 1
-            case ConsoleConfiguration.NINTENDO_64: return 4
-            case ConsoleConfiguration.NT_MINI_NOIR: return 2
-            case ConsoleConfiguration.SONY_PS1: return 3
-            case ConsoleConfiguration.SONY_PS3: return 1
-            case ConsoleConfiguration.SUPER_FAMICOM: return 1
-            case _: raise ValueError(f'Unknown ConsoleConfiguration value: \"{self}\"')
 
 def determineConsoleConfiguration(consoleArgument: str) -> ConsoleConfiguration | None:
     if re.fullmatch(r'^\s*game(?:\s+|_|-)?cube\s*$', consoleArgument, re.IGNORECASE):
@@ -113,6 +81,12 @@ def setVgaMatrixConfiguration(configuration: ConsoleConfiguration):
     except serial.SerialException as e:
         print(f"Extron connection error ({COM_PORT=}) ({BAUD_RATE=}) ({configuration=}) ({extronCommand=}):", e)
 
+def applyConsoleConfiguration(configuration: ConsoleConfiguration):
+    print(f'Applying console configuration: \"{configuration}\"')
+    setHdmiMatrixConfiguration(configuration)
+    setVgaMatrixConfiguration(configuration)
+    print(f'Finished applying console configuration: \"{configuration}\"')
+
 if __name__ == "__main__":
     arguments: list[str] | Any | None = sys.argv
 
@@ -129,6 +103,4 @@ if __name__ == "__main__":
     if consoleConfiguration is None:
         raise RuntimeError(f'Console configuration argument doesn\'t match any console ({consoleArgument=}) ({arguments=})')
 
-    print(f'Applying console configuration: \"{consoleConfiguration}\"')
-    setHdmiMatrixConfiguration(consoleConfiguration)
-    setVgaMatrixConfiguration(consoleConfiguration)
+    applyConsoleConfiguration(consoleConfiguration)
