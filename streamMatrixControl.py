@@ -9,7 +9,7 @@ from typing import Any
 
 import serial
 
-HDMI_MATRIX_IP = "192.168.1.7"
+HDMI_MATRIX_ADDRESS = "http://192.168.1.7"
 
 # the Extron MVX 84 VGA uses a baud rate of 9600
 BAUD_RATE = 9600
@@ -84,7 +84,7 @@ def setHdmiMatrixConfiguration(configuration: ConsoleConfiguration):
     try:
         for port in ports:
             randomNumber = random.random()
-            hdmiMatrixUrl = f'http://{HDMI_MATRIX_IP}/@PORT{port}={configuration.hdmiPort}.{randomNumber}'
+            hdmiMatrixUrl = f'{HDMI_MATRIX_ADDRESS}/@PORT{port}={configuration.hdmiPort}.{randomNumber}'
             now = datetime.now(timezone.utc)
 
             cookies: dict[str, Any] = {
@@ -99,7 +99,7 @@ def setHdmiMatrixConfiguration(configuration: ConsoleConfiguration):
             print(f"HDMI Matrix response (port {port}): {response}")
             time.sleep(SLEEP_DURATION) # Wait for the device to process
     except Exception as e:
-        print(f"HDMI Matrix connection error ({HDMI_MATRIX_IP=}) ({configuration=}):", e)
+        print(f"HDMI Matrix connection error ({HDMI_MATRIX_ADDRESS=}) ({configuration=}):", e)
 
 def setVgaMatrixConfiguration(configuration: ConsoleConfiguration):
     extronCommand = f'{configuration.extronPreset}.'
