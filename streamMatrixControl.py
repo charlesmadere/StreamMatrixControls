@@ -129,5 +129,6 @@ if __name__ == "__main__":
     if consoleConfiguration is None:
         raise RuntimeError(f'Console configuration argument doesn\'t match any console ({consoleArgument=}) ({arguments=})')
 
+    print(f'Applying console configuration: \"{consoleConfiguration}\"')
     setHdmiMatrixConfiguration(consoleConfiguration)
     setVgaMatrixConfiguration(consoleConfiguration)
