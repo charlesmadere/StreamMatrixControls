@@ -84,16 +84,16 @@ def setVgaMatrixConfiguration(configuration: ConsoleConfiguration):
         raise e
 
 def applyConsoleConfiguration(configuration: ConsoleConfiguration) -> bool:
-    print(f'Applying console configuration: \"{configuration}\"')
+    print(f'Applying console configuration ({configuration=})')
 
     try:
         setHdmiMatrixConfiguration(configuration)
         setVgaMatrixConfiguration(configuration)
     except Exception as e:
-        print(f"Encountered error during configuration ({configuration=}):", e)
+        print(f"Encountered error during console configuration ({configuration=}):", e)
         return False
 
-    print(f'Finished applying console configuration: \"{configuration}\"')
+    print(f'Finished applying console configuration ({configuration=})')
     return True
 
 if __name__ == "__main__":
