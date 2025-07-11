@@ -16,7 +16,7 @@ HDMI_MATRIX_ADDRESS = "http://192.168.1.7"
 BAUD_RATE = 9600
 
 # the Extron MVX 84 VGA is currently using COM4 on my system
-COM_PORT = "COM4"
+COM_PORT = "COM3"
 
 # small amount of buffer time to allow external devices to process
 SLEEP_DURATION = 0.2
