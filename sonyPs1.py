@@ -1,4 +1,7 @@
-from consoleConfiguration import ConsoleConfiguration
-from streamMatrixControl import applyConsoleConfiguration
+from applyConfiguration import applyConfiguration
+from consoles.absConsoleConfiguration import AbsConsoleConfiguration
+from consoles.sonyPs1Configuration import SonyPs1Configuration
 
-applyConsoleConfiguration(ConsoleConfiguration.SONY_PS1)
+
+consoleConfiguration: AbsConsoleConfiguration = SonyPs1Configuration()
+applyConfiguration(consoleConfiguration)

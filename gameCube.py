@@ -1,4 +1,7 @@
-from consoleConfiguration import ConsoleConfiguration
-from streamMatrixControl import applyConsoleConfiguration
+from applyConfiguration import applyConfiguration
+from consoles.absConsoleConfiguration import AbsConsoleConfiguration
+from consoles.gameCubeConfiguration import GameCubeConfiguration
 
-applyConsoleConfiguration(ConsoleConfiguration.GAME_CUBE)
+
+consoleConfiguration: AbsConsoleConfiguration = GameCubeConfiguration()
+applyConfiguration(consoleConfiguration)

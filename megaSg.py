@@ -1,4 +1,7 @@
-from consoleConfiguration import ConsoleConfiguration
-from streamMatrixControl import applyConsoleConfiguration
+from applyConfiguration import applyConfiguration
+from consoles.absConsoleConfiguration import AbsConsoleConfiguration
+from consoles.megaSgConfiguration import MegaSgConfiguration
 
-applyConsoleConfiguration(ConsoleConfiguration.MEGA_SG)
+
+consoleConfiguration: AbsConsoleConfiguration = MegaSgConfiguration()
+applyConfiguration(consoleConfiguration)

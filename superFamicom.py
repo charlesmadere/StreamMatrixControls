@@ -1,4 +1,7 @@
-from consoleConfiguration import ConsoleConfiguration
-from streamMatrixControl import applyConsoleConfiguration
+from applyConfiguration import applyConfiguration
+from consoles.absConsoleConfiguration import AbsConsoleConfiguration
+from consoles.superFamicomConfiguration import SuperFamicomConfiguration
 
-applyConsoleConfiguration(ConsoleConfiguration.SUPER_FAMICOM)
+
+consoleConfiguration: AbsConsoleConfiguration = SuperFamicomConfiguration()
+applyConfiguration(consoleConfiguration)
