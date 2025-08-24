@@ -1,4 +1,7 @@
-from consoleConfiguration import ConsoleConfiguration
-from streamMatrixControl import applyConsoleConfiguration
+from applyConfiguration import applyConfiguration
+from consoles.absConsoleConfiguration import AbsConsoleConfiguration
+from consoles.nintendo64Configuration import Nintendo64Configuration
 
-applyConsoleConfiguration(ConsoleConfiguration.NINTENDO_64)
+
+consoleConfiguration: AbsConsoleConfiguration = Nintendo64Configuration()
+applyConfiguration(consoleConfiguration)

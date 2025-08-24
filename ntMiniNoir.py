@@ -1,4 +1,7 @@
-from consoleConfiguration import ConsoleConfiguration
-from streamMatrixControl import applyConsoleConfiguration
+from applyConfiguration import applyConfiguration
+from consoles.absConsoleConfiguration import AbsConsoleConfiguration
+from consoles.ntMiniNoirConfiguration import NtMiniNoirConfiguration
 
-applyConsoleConfiguration(ConsoleConfiguration.NT_MINI_NOIR)
+
+consoleConfiguration: AbsConsoleConfiguration = NtMiniNoirConfiguration()
+applyConfiguration(consoleConfiguration)
