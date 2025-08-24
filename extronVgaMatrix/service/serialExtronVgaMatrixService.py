@@ -39,7 +39,7 @@ class SerialExtronVgaMatrixService(AbsExtronVgaMatrixService):
                 # wait a moment for the VGA Matrix to process
                 time.sleep(self.__sleepDuration)
 
-                # read up to 100 bytes
+                # read some of the response bytes
                 responseBytes = connection.read(self.__readBytes)
 
                 # decode the response for readability and logging
