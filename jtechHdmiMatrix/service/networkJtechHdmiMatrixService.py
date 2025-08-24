@@ -7,7 +7,7 @@ import requests
 
 from .absJtechHdmiMatrixService import AbsJtechHdmiMatrixService
 from ..configuration.networkJtechHdmiMatrixConfiguration import NetworkJtechHdmiMatrixConfiguration
-from ...consoles.consoleConfiguration import ConsoleConfiguration
+from ...consoles.absConsoleConfiguration import AbsConsoleConfiguration
 from ...retroTink.retroTinkConfiguration import RetroTinkConfiguration
 
 
@@ -27,11 +27,8 @@ class NetworkJtechHdmiMatrixService(AbsJtechHdmiMatrixService):
 
     def applyConfiguration(
         self,
-        consoleConfiguration: ConsoleConfiguration,
+        consoleConfiguration: AbsConsoleConfiguration,
     ):
-        if consoleConfiguration.hdmiPort > self.__configuration.portCount:
-            return
-
         try:
             for portIndex in range(self.__configuration.portCount):
                 actualPortIndex = portIndex + 1
@@ -65,15 +62,15 @@ class NetworkJtechHdmiMatrixService(AbsJtechHdmiMatrixService):
 
     def __buildUrl(
         self,
-        consoleConfiguration: ConsoleConfiguration,
+        consoleConfiguration: AbsConsoleConfiguration,
         portIndex: int,
     ) -> str:
         randomNumber = random.random()
         hdmiPort: int
 
-        if consoleConfiguration.usesRetroTinkPassThrough and portIndex != self.__retroTinkConfiguration.hdmiPort:
+        if consoleConfiguration.usesRetroTinkPassThrough() and portIndex != self.__retroTinkConfiguration.hdmiPort:
             hdmiPort = self.__retroTinkConfiguration.hdmiPort
         else:
-            hdmiPort = consoleConfiguration.hdmiPort
+            hdmiPort = consoleConfiguration.getHdmiPort()
 
         return f'{self.__configuration.ipAddress}/@PORT{portIndex}={hdmiPort}.{randomNumber}'

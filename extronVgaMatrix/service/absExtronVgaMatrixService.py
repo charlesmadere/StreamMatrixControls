@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-from ...consoles.consoleConfiguration import ConsoleConfiguration
+from ...consoles.absConsoleConfiguration import AbsConsoleConfiguration
 
 
 class AbsExtronVgaMatrixService(ABC):
@@ -8,6 +8,6 @@ class AbsExtronVgaMatrixService(ABC):
     @abstractmethod
     def applyConfiguration(
         self,
-        consoleConfiguration: ConsoleConfiguration,
+        consoleConfiguration: AbsConsoleConfiguration,
     ):
         pass

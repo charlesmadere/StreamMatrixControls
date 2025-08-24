@@ -2,7 +2,7 @@ from typing import Final
 
 from .absJtechHdmiMatrixService import AbsJtechHdmiMatrixService
 from ..configuration.serialJtechHdmiMatrixConfiguration import SerialJtechHdmiMatrixConfiguration
-from ...consoles.consoleConfiguration import ConsoleConfiguration
+from ...consoles.absConsoleConfiguration import AbsConsoleConfiguration
 from ...retroTink.retroTinkConfiguration import RetroTinkConfiguration
 
 
@@ -22,7 +22,7 @@ class SerialJtechHdmiMatrixService(AbsJtechHdmiMatrixService):
 
     def applyConfiguration(
         self,
-        consoleConfiguration: ConsoleConfiguration,
+        consoleConfiguration: AbsConsoleConfiguration,
     ):
         # TODO
         pass

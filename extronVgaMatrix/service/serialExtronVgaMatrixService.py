@@ -5,7 +5,7 @@ import serial
 
 from .absExtronVgaMatrixService import AbsExtronVgaMatrixService
 from ..configuration.serialExtronVgaMatrixConfiguration import SerialExtronVgaMatrixConfiguration
-from ...consoles.consoleConfiguration import ConsoleConfiguration
+from ...consoles.absConsoleConfiguration import AbsConsoleConfiguration
 
 
 class SerialExtronVgaMatrixService(AbsExtronVgaMatrixService):
@@ -22,7 +22,7 @@ class SerialExtronVgaMatrixService(AbsExtronVgaMatrixService):
 
     def applyConfiguration(
         self,
-        consoleConfiguration: ConsoleConfiguration,
+        consoleConfiguration: AbsConsoleConfiguration,
     ):
         command = self.__buildCommand(
             consoleConfiguration = consoleConfiguration,
@@ -52,7 +52,7 @@ class SerialExtronVgaMatrixService(AbsExtronVgaMatrixService):
 
     def __buildCommand(
         self,
-        consoleConfiguration: ConsoleConfiguration,
+        consoleConfiguration: AbsConsoleConfiguration,
     ) -> bytes:
         # append carriage return
-        return f'{consoleConfiguration.extronPreset}.'.encode('utf-8') + b'\r'
+        return f'{consoleConfiguration.getExtronPreset()}.'.encode('utf-8') + b'\r'
