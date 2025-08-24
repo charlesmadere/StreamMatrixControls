@@ -2,9 +2,9 @@ from consoles.absConsoleConfiguration import AbsConsoleConfiguration
 from extronVgaMatrix.configuration.serialExtronVgaMatrixConfiguration import SerialExtronVgaMatrixConfiguration
 from extronVgaMatrix.service.absExtronVgaMatrixService import AbsExtronVgaMatrixService
 from extronVgaMatrix.service.serialExtronVgaMatrixService import SerialExtronVgaMatrixService
-from jtechHdmiMatrix.configuration.networkJtechHdmiMatrixConfiguration import NetworkJtechHdmiMatrixConfiguration
+from jtechHdmiMatrix.configuration.serialJtechHdmiMatrixConfiguration import SerialJtechHdmiMatrixConfiguration
 from jtechHdmiMatrix.service.absJtechHdmiMatrixService import AbsJtechHdmiMatrixService
-from jtechHdmiMatrix.service.networkJtechHdmiMatrixService import NetworkJtechHdmiMatrixService
+from jtechHdmiMatrix.service.serialJtechHdmiMatrixService import SerialJtechHdmiMatrixService
 from retroTink.retroTinkConfiguration import RetroTinkConfiguration
 
 
@@ -16,9 +16,9 @@ extronVgaMatrixService: AbsExtronVgaMatrixService = SerialExtronVgaMatrixService
 
 retroTinkConfiguration = RetroTinkConfiguration()
 
-jtechHdmiMatrixConfiguration = NetworkJtechHdmiMatrixConfiguration()
+jtechHdmiMatrixConfiguration = SerialJtechHdmiMatrixConfiguration()
 
-jtechHdmiMatrixService: AbsJtechHdmiMatrixService = NetworkJtechHdmiMatrixService(
+jtechHdmiMatrixService: AbsJtechHdmiMatrixService = SerialJtechHdmiMatrixService(
     configuration = jtechHdmiMatrixConfiguration,
     retroTinkConfiguration = retroTinkConfiguration,
 )

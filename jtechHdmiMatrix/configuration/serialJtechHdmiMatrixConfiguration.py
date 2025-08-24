@@ -5,6 +5,6 @@ from .absJtechHdmiMatrixConfiguration import AbsJtechHdmiMatrixConfiguration
 
 @dataclass(frozen = True)
 class SerialJtechHdmiMatrixConfiguration(AbsJtechHdmiMatrixConfiguration):
-    baudRate: int
-    portCount: int
-    comPort: str
+    baudRate: int = 115200
+    portCount: int = 8
+    comPort: str = 'COM2'
