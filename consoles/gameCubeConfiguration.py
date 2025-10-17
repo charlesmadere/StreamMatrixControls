@@ -19,5 +19,6 @@ class GameCubeConfiguration(AbsConsoleConfiguration):
     def getWhichConsole(self) -> WhichConsole:
         return WhichConsole.GAME_CUBE
 
+    @property
     def usesRetroTinkPassThrough(self) -> bool:
         return False

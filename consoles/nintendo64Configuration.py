@@ -19,5 +19,6 @@ class Nintendo64Configuration(AbsConsoleConfiguration):
     def getWhichConsole(self) -> WhichConsole:
         return WhichConsole.NINTENDO_64
 
+    @property
     def usesRetroTinkPassThrough(self) -> bool:
         return False

@@ -19,5 +19,6 @@ class NtMiniNoirConfiguration(AbsConsoleConfiguration):
     def getWhichConsole(self) -> WhichConsole:
         return WhichConsole.NT_MINI_NOIR
 
+    @property
     def usesRetroTinkPassThrough(self) -> bool:
         return True

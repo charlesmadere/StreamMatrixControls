@@ -17,6 +17,7 @@ class AbsConsoleConfiguration(ABC):
     def getWhichConsole(self) -> WhichConsole:
         pass
 
+    @property
     @abstractmethod
     def usesRetroTinkPassThrough(self) -> bool:
         pass

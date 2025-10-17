@@ -19,5 +19,6 @@ class MegaSgConfiguration(AbsConsoleConfiguration):
     def getWhichConsole(self) -> WhichConsole:
         return WhichConsole.MEGA_SG
 
+    @property
     def usesRetroTinkPassThrough(self) -> bool:
         return False

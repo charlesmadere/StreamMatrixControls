@@ -2,6 +2,7 @@ import time
 from typing import Final
 
 import serial
+from serial import SerialBase
 
 from consoles.absConsoleConfiguration import AbsConsoleConfiguration
 from jtechHdmiMatrix.configuration.serialJtechHdmiMatrixConfiguration import SerialJtechHdmiMatrixConfiguration
@@ -32,28 +33,74 @@ class SerialJtechHdmiMatrixService(AbsJtechHdmiMatrixService):
                 self.__configuration.comPort,
                 self.__configuration.baudRate,
                 timeout = 1,
-            ) as connection:
-                for outputPortIndex in range(self.__configuration.portCount):
-                    serialCommand = self.__buildSerialCommand(
-                        consoleConfiguration = consoleConfiguration,
-                        outputPortIndex = outputPortIndex,
-                    )
-
-                    connection.write(serialCommand)
-
-                    # wait a moment for the HDMI Matrix to process
-                    time.sleep(self.__sleepDuration)
-
-                    # read some of the response bytes
-                    responseBytes = connection.read(self.__readBytes)
-
-                    # decode the response for readability and logging
-                    response = responseBytes.decode(encoding = 'utf-8', errors = 'ignore')
-
-                    print(f'JTech HDMI Matrix response ({outputPortIndex=}) ({consoleConfiguration=}): {response}')
+            ) as serialConnection:
+                self.__applyConfiguration(
+                    consoleConfiguration = consoleConfiguration,
+                    serialConnection = serialConnection,
+                )
         except Exception as e:
             print(f'JTech HDMI Matrix connection error ({self.__configuration=}) ({consoleConfiguration=}):', e)
             raise e
+
+    def __applyConfiguration(
+        self,
+        consoleConfiguration: AbsConsoleConfiguration,
+        serialConnection: SerialBase,
+    ):
+        serialCommand = f'@T {4:02}'
+
+        for outputPortIndex in range(self.__configuration.portCount):
+            inputPortIndex: int
+
+            if consoleConfiguration.usesRetroTinkPassThrough and (outputPortIndex + 1 != self.__retroTinkConfiguration.hdmiPort):
+                inputPortIndex = self.__retroTinkConfiguration.hdmiPort
+            else:
+                inputPortIndex = consoleConfiguration.getHdmiPort()
+
+            # convert the HDMI port number to be 0 based (port 1 is actually port 0)
+            inputPortIndex = inputPortIndex - 1
+
+            serialCommand += f' {inputPortIndex:02}'
+
+        serialCommand += ' #'
+
+        serialConnection.write(serialCommand.encode('utf-8') + b'\r')
+
+        # wait a moment for the HDMI Matrix to process
+        time.sleep(self.__sleepDuration)
+
+        # read some of the response bytes
+        responseBytes = serialConnection.read(self.__readBytes)
+
+        # decode the response for readability and logging
+        response = responseBytes.decode(encoding = 'utf-8', errors = 'ignore')
+
+        print(f'JTech HDMI Matrix response ({consoleConfiguration=}) ({serialCommand=}) ({response=})')
+
+    def __applyConfigurationForRetroTinkPassThrough(
+        self,
+        consoleConfiguration: AbsConsoleConfiguration,
+        serialConnection: SerialBase,
+    ):
+        serialCommand = ''
+
+        for outputPortIndex in range(self.__configuration.portCount):
+            serialCommand += f'@T {outputPortIndex:02} {(consoleConfiguration.getHdmiPort() - 1):02} #\r\n'
+
+        # serialCommand = f'@T 00 {(consoleConfiguration.getHdmiPort() - 1):02} #'.encode('utf-8') + b'\r\n'
+
+        serialConnection.write(serialCommand.encode('utf-8') + b'\r')
+
+        # wait a moment for the HDMI Matrix to process
+        time.sleep(self.__sleepDuration)
+
+        # read some of the response bytes
+        responseBytes = serialConnection.read(self.__readBytes)
+
+        # decode the response for readability and logging
+        response = responseBytes.decode(encoding='utf-8', errors='ignore')
+
+        print(f'JTech HDMI Matrix response ({consoleConfiguration=}) ({serialCommand=}) ({response=})')
 
     def __buildSerialCommand(
         self,
@@ -62,7 +109,7 @@ class SerialJtechHdmiMatrixService(AbsJtechHdmiMatrixService):
     ) -> bytes:
         inputPort: int
 
-        if consoleConfiguration.usesRetroTinkPassThrough() and (outputPortIndex + 1) != self.__retroTinkConfiguration.hdmiPort:
+        if consoleConfiguration.usesRetroTinkPassThrough and (outputPortIndex + 1 != self.__retroTinkConfiguration.hdmiPort):
             inputPort = self.__retroTinkConfiguration.hdmiPort
         else:
             inputPort = consoleConfiguration.getHdmiPort()

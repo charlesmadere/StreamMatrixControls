@@ -19,5 +19,6 @@ class SonyPs1Configuration(AbsConsoleConfiguration):
     def getWhichConsole(self) -> WhichConsole:
         return WhichConsole.SONY_PS1
 
+    @property
     def usesRetroTinkPassThrough(self) -> bool:
         return False

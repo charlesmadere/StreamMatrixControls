@@ -19,5 +19,6 @@ class SuperFamicomConfiguration(AbsConsoleConfiguration):
     def getWhichConsole(self) -> WhichConsole:
         return WhichConsole.SUPER_FAMICOM
 
+    @property
     def usesRetroTinkPassThrough(self) -> bool:
         return False
