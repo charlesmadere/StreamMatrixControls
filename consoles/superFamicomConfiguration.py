@@ -8,7 +8,7 @@ from consoles.whichConsole import WhichConsole
 class SuperFamicomConfiguration(AbsConsoleConfiguration):
 
     extronPreset: int = 3
-    hdmiPort: int = 1
+    hdmiPort: int = 8
 
     def getExtronPreset(self) -> int:
         return self.extronPreset

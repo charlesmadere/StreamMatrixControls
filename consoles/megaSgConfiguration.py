@@ -8,7 +8,7 @@ from consoles.whichConsole import WhichConsole
 class MegaSgConfiguration(AbsConsoleConfiguration):
 
     extronPreset: int = 2
-    hdmiPort: int = 1
+    hdmiPort: int = 8
 
     def getExtronPreset(self) -> int:
         return self.extronPreset

@@ -8,7 +8,7 @@ from consoles.whichConsole import WhichConsole
 class SonyPs3Configuration(AbsConsoleConfiguration):
 
     extronPreset: int = 7
-    hdmiPort: int = 1
+    hdmiPort: int = 8
 
     def getExtronPreset(self) -> int:
         return self.extronPreset
