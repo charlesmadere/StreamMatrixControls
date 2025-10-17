@@ -8,7 +8,7 @@ from .whichConsole import WhichConsole
 class Nintendo64Configuration(AbsConsoleConfiguration):
 
     extronPreset: int = 5
-    hdmiPort: int = 4
+    hdmiPort: int = 3
 
     def getExtronPreset(self) -> int:
         return self.extronPreset

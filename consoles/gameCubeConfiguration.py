@@ -8,7 +8,7 @@ from .whichConsole import WhichConsole
 class GameCubeConfiguration(AbsConsoleConfiguration):
 
     extronPreset: int = 6
-    hdmiPort: int = 5
+    hdmiPort: int = 4
 
     def getExtronPreset(self) -> int:
         return self.extronPreset
