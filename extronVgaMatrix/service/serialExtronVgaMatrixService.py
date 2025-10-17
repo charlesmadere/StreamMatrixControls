@@ -3,9 +3,9 @@ from typing import Final
 
 import serial
 
-from .absExtronVgaMatrixService import AbsExtronVgaMatrixService
-from ..configuration.serialExtronVgaMatrixConfiguration import SerialExtronVgaMatrixConfiguration
-from ...consoles.absConsoleConfiguration import AbsConsoleConfiguration
+from consoles.absConsoleConfiguration import AbsConsoleConfiguration
+from extronVgaMatrix.configuration.serialExtronVgaMatrixConfiguration import SerialExtronVgaMatrixConfiguration
+from extronVgaMatrix.service.absExtronVgaMatrixService import AbsExtronVgaMatrixService
 
 
 class SerialExtronVgaMatrixService(AbsExtronVgaMatrixService):

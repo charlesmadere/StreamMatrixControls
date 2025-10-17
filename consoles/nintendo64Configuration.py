@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 
-from .absConsoleConfiguration import AbsConsoleConfiguration
-from .whichConsole import WhichConsole
+from consoles.absConsoleConfiguration import AbsConsoleConfiguration
+from consoles.whichConsole import WhichConsole
 
 
 @dataclass(frozen = True)

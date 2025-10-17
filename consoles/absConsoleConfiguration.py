@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-from .whichConsole import WhichConsole
+from consoles.whichConsole import WhichConsole
 
 
 class AbsConsoleConfiguration(ABC):

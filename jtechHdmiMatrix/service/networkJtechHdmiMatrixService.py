@@ -5,10 +5,10 @@ from typing import Any, Final
 
 import requests
 
-from .absJtechHdmiMatrixService import AbsJtechHdmiMatrixService
-from ..configuration.networkJtechHdmiMatrixConfiguration import NetworkJtechHdmiMatrixConfiguration
-from ...consoles.absConsoleConfiguration import AbsConsoleConfiguration
-from ...retroTink.retroTinkConfiguration import RetroTinkConfiguration
+from consoles.absConsoleConfiguration import AbsConsoleConfiguration
+from jtechHdmiMatrix.configuration.networkJtechHdmiMatrixConfiguration import NetworkJtechHdmiMatrixConfiguration
+from jtechHdmiMatrix.service.absJtechHdmiMatrixService import AbsJtechHdmiMatrixService
+from retroTink.retroTinkConfiguration import RetroTinkConfiguration
 
 
 class NetworkJtechHdmiMatrixService(AbsJtechHdmiMatrixService):

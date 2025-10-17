@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 
-from .absJtechHdmiMatrixConfiguration import AbsJtechHdmiMatrixConfiguration
+from jtechHdmiMatrix.configuration.absJtechHdmiMatrixConfiguration import AbsJtechHdmiMatrixConfiguration
 
 
 @dataclass(frozen = True)

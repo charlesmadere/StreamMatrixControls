@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 
-from .absExtronVgaMatrixConfiguration import AbsExtronVgaMatrixConfiguration
+from extronVgaMatrix.configuration.absExtronVgaMatrixConfiguration import AbsExtronVgaMatrixConfiguration
 
 
 @dataclass(frozen = True)

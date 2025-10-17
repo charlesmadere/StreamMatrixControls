@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-from ...consoles.absConsoleConfiguration import AbsConsoleConfiguration
+from consoles.absConsoleConfiguration import AbsConsoleConfiguration
 
 
 class AbsExtronVgaMatrixService(ABC):

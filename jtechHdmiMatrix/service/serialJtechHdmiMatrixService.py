@@ -3,10 +3,10 @@ from typing import Final
 
 import serial
 
-from .absJtechHdmiMatrixService import AbsJtechHdmiMatrixService
-from ..configuration.serialJtechHdmiMatrixConfiguration import SerialJtechHdmiMatrixConfiguration
-from ...consoles.absConsoleConfiguration import AbsConsoleConfiguration
-from ...retroTink.retroTinkConfiguration import RetroTinkConfiguration
+from consoles.absConsoleConfiguration import AbsConsoleConfiguration
+from jtechHdmiMatrix.configuration.serialJtechHdmiMatrixConfiguration import SerialJtechHdmiMatrixConfiguration
+from jtechHdmiMatrix.service.absJtechHdmiMatrixService import AbsJtechHdmiMatrixService
+from retroTink.retroTinkConfiguration import RetroTinkConfiguration
 
 
 class SerialJtechHdmiMatrixService(AbsJtechHdmiMatrixService):
@@ -71,7 +71,7 @@ class SerialJtechHdmiMatrixService(AbsJtechHdmiMatrixService):
         inputPortIndex = inputPort - 1
 
         # convert the HDMI port number into the required string format
-        outputPortIndexString = f'{outputPortIndex::02}'
+        outputPortIndexString = f'{outputPortIndex:02}'
         inputPortIndexString = f'{inputPortIndex:02}'
 
         # append carriage return
