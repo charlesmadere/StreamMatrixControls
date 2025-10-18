@@ -3,4 +3,5 @@ from dataclasses import dataclass
 
 @dataclass(frozen = True)
 class RetroTinkConfiguration:
-    hdmiPort: int = 8
+    inputHdmiPort: int = 8
+    outputHdmiPort: int = 6

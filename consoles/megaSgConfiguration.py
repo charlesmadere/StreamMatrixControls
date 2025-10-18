@@ -7,18 +7,18 @@ from consoles.whichConsole import WhichConsole
 @dataclass(frozen = True)
 class MegaSgConfiguration(AbsConsoleConfiguration):
 
-    extronPreset: int = 2
-    hdmiPort: int = 8
+    @property
+    def extronPreset(self) -> int:
+        return 2
 
-    def getExtronPreset(self) -> int:
-        return self.extronPreset
-
-    def getHdmiPort(self) -> int:
-        return self.hdmiPort
-
-    def getWhichConsole(self) -> WhichConsole:
-        return WhichConsole.MEGA_SG
+    @property
+    def hdmiPort(self) -> int:
+        return 8
 
     @property
     def usesRetroTinkPassThrough(self) -> bool:
         return False
+
+    @property
+    def whichConsole(self) -> WhichConsole:
+        return WhichConsole.MEGA_SG

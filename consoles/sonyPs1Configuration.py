@@ -7,18 +7,18 @@ from consoles.whichConsole import WhichConsole
 @dataclass(frozen = True)
 class SonyPs1Configuration(AbsConsoleConfiguration):
 
-    extronPreset: int = 4
-    hdmiPort: int = 2
+    @property
+    def extronPreset(self) -> int:
+        return 4
 
-    def getExtronPreset(self) -> int:
-        return self.extronPreset
-
-    def getHdmiPort(self) -> int:
-        return self.hdmiPort
-
-    def getWhichConsole(self) -> WhichConsole:
-        return WhichConsole.SONY_PS1
+    @property
+    def hdmiPort(self) -> int:
+        return 2
 
     @property
     def usesRetroTinkPassThrough(self) -> bool:
         return False
+
+    @property
+    def whichConsole(self) -> WhichConsole:
+        return WhichConsole.SONY_PS1

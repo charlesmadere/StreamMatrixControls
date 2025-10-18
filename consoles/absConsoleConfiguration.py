@@ -5,19 +5,22 @@ from consoles.whichConsole import WhichConsole
 
 class AbsConsoleConfiguration(ABC):
 
+    @property
     @abstractmethod
-    def getExtronPreset(self) -> int:
+    def extronPreset(self) -> int:
         pass
 
+    @property
     @abstractmethod
-    def getHdmiPort(self) -> int:
-        pass
-
-    @abstractmethod
-    def getWhichConsole(self) -> WhichConsole:
+    def hdmiPort(self) -> int:
         pass
 
     @property
     @abstractmethod
     def usesRetroTinkPassThrough(self) -> bool:
+        pass
+
+    @property
+    @abstractmethod
+    def whichConsole(self) -> WhichConsole:
         pass

@@ -7,18 +7,18 @@ from consoles.whichConsole import WhichConsole
 @dataclass(frozen = True)
 class Nintendo64Configuration(AbsConsoleConfiguration):
 
-    extronPreset: int = 5
-    hdmiPort: int = 3
+    @property
+    def extronPreset(self) -> int:
+        return 5
 
-    def getExtronPreset(self) -> int:
-        return self.extronPreset
-
-    def getHdmiPort(self) -> int:
-        return self.hdmiPort
-
-    def getWhichConsole(self) -> WhichConsole:
-        return WhichConsole.NINTENDO_64
+    @property
+    def hdmiPort(self) -> int:
+        return 3
 
     @property
     def usesRetroTinkPassThrough(self) -> bool:
         return False
+
+    @property
+    def whichConsole(self) -> WhichConsole:
+        return WhichConsole.NINTENDO_64

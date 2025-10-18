@@ -7,18 +7,18 @@ from consoles.whichConsole import WhichConsole
 @dataclass(frozen = True)
 class SuperFamicomConfiguration(AbsConsoleConfiguration):
 
-    extronPreset: int = 3
-    hdmiPort: int = 8
+    @property
+    def extronPreset(self) -> int:
+        return 3
 
-    def getExtronPreset(self) -> int:
-        return self.extronPreset
-
-    def getHdmiPort(self) -> int:
-        return self.hdmiPort
-
-    def getWhichConsole(self) -> WhichConsole:
-        return WhichConsole.SUPER_FAMICOM
+    @property
+    def hdmiPort(self) -> int:
+        return 8
 
     @property
     def usesRetroTinkPassThrough(self) -> bool:
         return False
+
+    @property
+    def whichConsole(self) -> WhichConsole:
+        return WhichConsole.SUPER_FAMICOM

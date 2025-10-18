@@ -17,7 +17,7 @@ class NetworkJtechHdmiMatrixService(AbsJtechHdmiMatrixService):
         self,
         configuration: NetworkJtechHdmiMatrixConfiguration,
         retroTinkConfiguration: RetroTinkConfiguration,
-        sleepDuration: float = 0.2,
+        sleepDuration: float = 0.25,
         timeZone: timezone = timezone.utc,
     ):
         self.__configuration: Final[NetworkJtechHdmiMatrixConfiguration] = configuration
@@ -45,7 +45,7 @@ class NetworkJtechHdmiMatrixService(AbsJtechHdmiMatrixService):
                     cookies = cookies,
                 )
 
-                print(f'JTech HDMI Matrix response ({actualPortIndex=}) ({consoleConfiguration=}): {response}')
+                print(f'JTech HDMI Matrix response ({consoleConfiguration=}) ({actualPortIndex=}) ({response=})')
 
                 # wait a moment for the HDMI Matrix to process
                 time.sleep(self.__sleepDuration)
@@ -68,9 +68,9 @@ class NetworkJtechHdmiMatrixService(AbsJtechHdmiMatrixService):
         randomNumber = random.random()
         hdmiPort: int
 
-        if consoleConfiguration.usesRetroTinkPassThrough and portIndex != self.__retroTinkConfiguration.hdmiPort:
-            hdmiPort = self.__retroTinkConfiguration.hdmiPort
+        if consoleConfiguration.usesRetroTinkPassThrough and portIndex != self.__retroTinkConfiguration.outputHdmiPort:
+            hdmiPort = self.__retroTinkConfiguration.inputHdmiPort
         else:
-            hdmiPort = consoleConfiguration.getHdmiPort()
+            hdmiPort = consoleConfiguration.hdmiPort
 
         return f'{self.__configuration.ipAddress}/@PORT{portIndex}={hdmiPort}.{randomNumber}'

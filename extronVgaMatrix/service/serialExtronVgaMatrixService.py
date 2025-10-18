@@ -13,11 +13,13 @@ class SerialExtronVgaMatrixService(AbsExtronVgaMatrixService):
     def __init__(
         self,
         configuration: SerialExtronVgaMatrixConfiguration,
-        sleepDuration: float = 0.25,
+        sleepDurationSeconds: float = 0.25,
+        timeoutDurationSeconds: float = 1.0,
         readBytes: int = 100,
     ):
         self.__configuration: Final[SerialExtronVgaMatrixConfiguration] = configuration
-        self.__sleepDuration: Final[float] = sleepDuration
+        self.__sleepDurationSeconds: Final[float] = sleepDurationSeconds
+        self.__timeoutDurationSeconds: Final[float] = timeoutDurationSeconds
         self.__readBytes: Final[int] = readBytes
 
     def applyConfiguration(
@@ -30,14 +32,14 @@ class SerialExtronVgaMatrixService(AbsExtronVgaMatrixService):
 
         try:
             with serial.Serial(
-                self.__configuration.comPort,
-                self.__configuration.baudRate,
-                timeout = 1,
+                port = self.__configuration.comPort,
+                baudrate = self.__configuration.baudRate,
+                timeout = self.__timeoutDurationSeconds,
             ) as connection:
                 connection.write(command)
 
                 # wait a moment for the VGA Matrix to process
-                time.sleep(self.__sleepDuration)
+                time.sleep(self.__sleepDurationSeconds)
 
                 # read some of the response bytes
                 responseBytes = connection.read(self.__readBytes)
@@ -45,7 +47,7 @@ class SerialExtronVgaMatrixService(AbsExtronVgaMatrixService):
                 # decode the response for readability and logging
                 response = responseBytes.decode(encoding = 'utf-8', errors = 'ignore')
 
-                print(f'Extron VGA Matrix response ({consoleConfiguration=}): {response}')
+                print(f'Extron VGA Matrix response ({consoleConfiguration=}) ({command=}) ({response=})')
         except Exception as e:
             print(f'Extron VGA Matrix connection error ({self.__configuration=}) ({consoleConfiguration=}):', e)
             raise e
@@ -55,4 +57,4 @@ class SerialExtronVgaMatrixService(AbsExtronVgaMatrixService):
         consoleConfiguration: AbsConsoleConfiguration,
     ) -> bytes:
         # append carriage return
-        return f'{consoleConfiguration.getExtronPreset()}.'.encode('utf-8') + b'\r'
+        return f'{consoleConfiguration.extronPreset}.'.encode('utf-8') + b'\r'

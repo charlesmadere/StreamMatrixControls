@@ -7,18 +7,18 @@ from consoles.whichConsole import WhichConsole
 @dataclass(frozen = True)
 class NtMiniNoirConfiguration(AbsConsoleConfiguration):
 
-    extronPreset: int = 1
-    hdmiPort: int = 1
+    @property
+    def extronPreset(self) -> int:
+        return 1
 
-    def getExtronPreset(self) -> int:
-        return self.extronPreset
-
-    def getHdmiPort(self) -> int:
-        return self.hdmiPort
-
-    def getWhichConsole(self) -> WhichConsole:
-        return WhichConsole.NT_MINI_NOIR
+    @property
+    def hdmiPort(self) -> int:
+        return 1
 
     @property
     def usesRetroTinkPassThrough(self) -> bool:
         return True
+
+    @property
+    def whichConsole(self) -> WhichConsole:
+        return WhichConsole.NT_MINI_NOIR
