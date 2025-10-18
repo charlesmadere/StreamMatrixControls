@@ -26,35 +26,35 @@ class SerialExtronVgaMatrixService(AbsExtronVgaMatrixService):
         self,
         consoleConfiguration: AbsConsoleConfiguration,
     ):
-        command = self.__buildCommand(
-            consoleConfiguration = consoleConfiguration,
-        )
-
         try:
             with serial.Serial(
                 port = self.__configuration.comPort,
                 baudrate = self.__configuration.baudRate,
                 timeout = self.__timeoutDurationSeconds,
             ) as connection:
-                connection.write(command)
-
-                # wait a moment for the VGA Matrix to process
-                time.sleep(self.__sleepDurationSeconds)
-
-                # read some of the response bytes
-                responseBytes = connection.read(self.__readBytes)
-
-                # decode the response for readability and logging
-                response = responseBytes.decode(encoding = 'utf-8', errors = 'ignore')
-
-                print(f'Extron VGA Matrix response ({consoleConfiguration=}) ({command=}) ({response=})')
+                self.__applyConfiguration(
+                    consoleConfiguration = consoleConfiguration,
+                    serialConnection = connection,
+                )
         except Exception as e:
             print(f'Extron VGA Matrix connection error ({self.__configuration=}) ({consoleConfiguration=}):', e)
             raise e
 
-    def __buildCommand(
+    def __applyConfiguration(
         self,
         consoleConfiguration: AbsConsoleConfiguration,
-    ) -> bytes:
-        # append carriage return
-        return f'{consoleConfiguration.extronPreset}.'.encode('utf-8') + b'\r'
+        serialConnection: serial.Serial,
+    ):
+        serialCommand = f'{consoleConfiguration.extronPreset}.'
+        serialConnection.write(serialCommand.encode('utf-8') + b'\r')
+
+        # wait a moment for the VGA Matrix to process
+        time.sleep(self.__sleepDurationSeconds)
+
+        # read some of the response bytes
+        responseBytes = serialConnection.read(self.__readBytes)
+
+        # decode the response for readability and logging
+        response = responseBytes.decode(encoding = 'utf-8', errors = 'ignore')
+
+        print(f'Extron VGA Matrix response ({consoleConfiguration=}) ({serialCommand=}) ({response=})')
