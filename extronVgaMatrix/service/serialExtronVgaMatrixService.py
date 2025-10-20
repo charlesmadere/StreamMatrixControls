@@ -32,10 +32,10 @@ class SerialExtronVgaMatrixService(AbsExtronVgaMatrixService):
                 port = self.__configuration.comPort,
                 baudrate = self.__configuration.baudRate,
                 timeout = self.__timeoutDurationSeconds,
-            ) as connection:
+            ) as serialConnection:
                 self.__applyConfiguration(
                     consoleConfiguration = consoleConfiguration,
-                    serialConnection = connection,
+                    serialConnection = serialConnection,
                 )
         except Exception as e:
             print(f'Extron VGA Matrix connection error ({self.__configuration=}) ({consoleConfiguration=}):', e)
