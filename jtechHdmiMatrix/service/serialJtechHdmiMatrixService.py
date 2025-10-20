@@ -54,7 +54,7 @@ class SerialJtechHdmiMatrixService(AbsJtechHdmiMatrixService):
         for outputPortIndex in range(self.__configuration.portCount):
             inputPortIndex: int
 
-            if consoleConfiguration.usesRetroTinkPassThrough and (outputPortIndex + 1 != self.__retroTinkConfiguration.outputHdmiPort):
+            if consoleConfiguration.usesRetroTinkPassThrough and (outputPortIndex + 1 > self.__retroTinkConfiguration.outputHdmiPort):
                 inputPortIndex = self.__retroTinkConfiguration.inputHdmiPort
             else:
                 inputPortIndex = consoleConfiguration.hdmiPort

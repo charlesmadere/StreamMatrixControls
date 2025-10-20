@@ -68,7 +68,7 @@ class NetworkJtechHdmiMatrixService(AbsJtechHdmiMatrixService):
         randomNumber = random.random()
         hdmiPort: int
 
-        if consoleConfiguration.usesRetroTinkPassThrough and portIndex != self.__retroTinkConfiguration.outputHdmiPort:
+        if consoleConfiguration.usesRetroTinkPassThrough and (portIndex + 1 > self.__retroTinkConfiguration.outputHdmiPort):
             hdmiPort = self.__retroTinkConfiguration.inputHdmiPort
         else:
             hdmiPort = consoleConfiguration.hdmiPort
