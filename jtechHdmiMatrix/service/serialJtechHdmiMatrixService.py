@@ -2,7 +2,7 @@ import time
 from typing import Final
 
 import serial
-from serial import SerialBase
+from serial.serialutil import SerialBase
 
 from consoles.absConsoleConfiguration import AbsConsoleConfiguration
 from jtechHdmiMatrix.configuration.serialJtechHdmiMatrixConfiguration import SerialJtechHdmiMatrixConfiguration
