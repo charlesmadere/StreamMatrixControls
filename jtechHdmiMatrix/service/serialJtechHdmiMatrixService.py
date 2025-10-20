@@ -2,7 +2,6 @@ import time
 from typing import Final
 
 import serial
-from serial.serialutil import SerialBase
 
 from consoles.absConsoleConfiguration import AbsConsoleConfiguration
 from jtechHdmiMatrix.configuration.serialJtechHdmiMatrixConfiguration import SerialJtechHdmiMatrixConfiguration
@@ -47,7 +46,7 @@ class SerialJtechHdmiMatrixService(AbsJtechHdmiMatrixService):
     def __applyConfiguration(
         self,
         consoleConfiguration: AbsConsoleConfiguration,
-        serialConnection: SerialBase,
+        serialConnection: serial.Serial,
     ):
         serialCommand = f'@T {4:02}'
 

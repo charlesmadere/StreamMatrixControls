@@ -2,7 +2,6 @@ import time
 from typing import Final
 
 import serial
-from serial.serialutil import SerialBase
 
 from consoles.absConsoleConfiguration import AbsConsoleConfiguration
 from extronVgaMatrix.configuration.serialExtronVgaMatrixConfiguration import SerialExtronVgaMatrixConfiguration
@@ -44,7 +43,7 @@ class SerialExtronVgaMatrixService(AbsExtronVgaMatrixService):
     def __applyConfiguration(
         self,
         consoleConfiguration: AbsConsoleConfiguration,
-        serialConnection: SerialBase,
+        serialConnection: serial.Serial,
     ):
         serialCommand = f'{consoleConfiguration.extronPreset}.'
         serialConnection.write(serialCommand.encode('utf-8') + b'\r')
