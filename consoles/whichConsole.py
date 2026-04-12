@@ -7,6 +7,7 @@ class WhichConsole(Enum):
     MEGA_SG = auto()
     NINTENDO_64 = auto()
     NT_MINI_NOIR = auto()
+    SEGA_DREAMCAST = auto()
     SONY_PS1 = auto()
     SONY_PS3 = auto()
     SUPER_FAMICOM = auto()

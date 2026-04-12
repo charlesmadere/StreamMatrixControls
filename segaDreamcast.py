@@ -1,0 +1,7 @@
+from applyConfiguration import applyConfiguration
+from consoles.absConsoleConfiguration import AbsConsoleConfiguration
+from consoles.segaDreamcastConfiguration import SegaDreamcastConfiguration
+
+
+consoleConfiguration: AbsConsoleConfiguration = SegaDreamcastConfiguration()
+applyConfiguration(consoleConfiguration)
