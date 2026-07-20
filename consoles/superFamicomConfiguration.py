@@ -8,6 +8,10 @@ from consoles.whichConsole import WhichConsole
 class SuperFamicomConfiguration(AbsConsoleConfiguration):
 
     @property
+    def extronHdmiPreset(self) -> int:
+        return 1
+
+    @property
     def extronVgaPreset(self) -> int:
         return 3
 

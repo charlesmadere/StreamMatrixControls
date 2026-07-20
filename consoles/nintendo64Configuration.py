@@ -8,6 +8,10 @@ from consoles.whichConsole import WhichConsole
 class Nintendo64Configuration(AbsConsoleConfiguration):
 
     @property
+    def extronHdmiPreset(self) -> int:
+        raise NotImplementedError()
+
+    @property
     def extronVgaPreset(self) -> int:
         return 5
 

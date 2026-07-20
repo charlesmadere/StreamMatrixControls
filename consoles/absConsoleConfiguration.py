@@ -7,6 +7,11 @@ class AbsConsoleConfiguration(ABC):
 
     @property
     @abstractmethod
+    def extronHdmiPreset(self) -> int:
+        pass
+
+    @property
+    @abstractmethod
     def extronVgaPreset(self) -> int:
         pass
 
