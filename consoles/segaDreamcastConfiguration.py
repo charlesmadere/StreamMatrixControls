@@ -4,11 +4,11 @@ from consoles.absConsoleConfiguration import AbsConsoleConfiguration
 from consoles.whichConsole import WhichConsole
 
 
-@dataclass(frozen = True)
+@dataclass(frozen = True, slots = True)
 class SegaDreamcastConfiguration(AbsConsoleConfiguration):
 
     @property
-    def extronPreset(self) -> int:
+    def extronVgaPreset(self) -> int:
         return 6
 
     @property

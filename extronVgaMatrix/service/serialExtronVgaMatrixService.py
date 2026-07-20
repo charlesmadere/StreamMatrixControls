@@ -45,7 +45,7 @@ class SerialExtronVgaMatrixService(AbsExtronVgaMatrixService):
         consoleConfiguration: AbsConsoleConfiguration,
         serialConnection: serial.Serial,
     ):
-        serialCommand = f'{consoleConfiguration.extronPreset}.'
+        serialCommand = f'{consoleConfiguration.extronVgaPreset}.'
         serialConnection.write(serialCommand.encode('utf-8') + b'\r')
 
         # wait a moment for the VGA Matrix to process

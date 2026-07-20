@@ -3,7 +3,7 @@ from dataclasses import dataclass
 from jtechHdmiMatrix.configuration.absJtechHdmiMatrixConfiguration import AbsJtechHdmiMatrixConfiguration
 
 
-@dataclass(frozen = True)
+@dataclass(frozen = True, slots = True)
 class SerialJtechHdmiMatrixConfiguration(AbsJtechHdmiMatrixConfiguration):
     baudRate: int = 115200
     portCount: int = 8
