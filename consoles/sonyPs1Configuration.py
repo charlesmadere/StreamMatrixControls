@@ -12,7 +12,7 @@ class SonyPs1Configuration(AbsConsoleConfiguration):
         return 4
 
     @property
-    def hdmiPort(self) -> int:
+    def jtechHdmiPort(self) -> int:
         return 2
 
     @property

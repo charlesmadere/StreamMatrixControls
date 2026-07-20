@@ -12,7 +12,7 @@ class SegaDreamcastConfiguration(AbsConsoleConfiguration):
         return 6
 
     @property
-    def hdmiPort(self) -> int:
+    def jtechHdmiPort(self) -> int:
         return 8
 
     @property

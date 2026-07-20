@@ -12,7 +12,7 @@ class Nintendo64Configuration(AbsConsoleConfiguration):
         return 5
 
     @property
-    def hdmiPort(self) -> int:
+    def jtechHdmiPort(self) -> int:
         return 3
 
     @property

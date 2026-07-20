@@ -12,7 +12,7 @@ class AbsConsoleConfiguration(ABC):
 
     @property
     @abstractmethod
-    def hdmiPort(self) -> int:
+    def jtechHdmiPort(self) -> int:
         pass
 
     @property

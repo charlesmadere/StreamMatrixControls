@@ -12,7 +12,7 @@ class NtMiniNoirConfiguration(AbsConsoleConfiguration):
         return 1
 
     @property
-    def hdmiPort(self) -> int:
+    def jtechHdmiPort(self) -> int:
         return 1
 
     @property

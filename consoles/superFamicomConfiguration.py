@@ -12,7 +12,7 @@ class SuperFamicomConfiguration(AbsConsoleConfiguration):
         return 3
 
     @property
-    def hdmiPort(self) -> int:
+    def jtechHdmiPort(self) -> int:
         return 8
 
     @property

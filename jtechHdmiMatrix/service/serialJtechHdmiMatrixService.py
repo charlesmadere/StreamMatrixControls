@@ -56,7 +56,7 @@ class SerialJtechHdmiMatrixService(AbsJtechHdmiMatrixService):
             if consoleConfiguration.usesRetroTinkPassThrough and (outputPortIndex + 1 > self.__retroTinkConfiguration.outputHdmiPort):
                 inputPortIndex = self.__retroTinkConfiguration.inputHdmiPort
             else:
-                inputPortIndex = consoleConfiguration.hdmiPort
+                inputPortIndex = consoleConfiguration.jtechHdmiPort
 
             # convert the HDMI port number to be 0 based (port 1 is actually port 0)
             inputPortIndex = inputPortIndex - 1

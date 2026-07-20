@@ -12,7 +12,7 @@ class MegaSgConfiguration(AbsConsoleConfiguration):
         return 2
 
     @property
-    def hdmiPort(self) -> int:
+    def jtechHdmiPort(self) -> int:
         return 8
 
     @property
