@@ -3,7 +3,7 @@ from typing import Final
 
 import serial
 
-from consoles.absConsoleConfiguration import AbsConsoleConfiguration
+from consoles.consoleConfiguration import ConsoleConfiguration
 from jtechHdmiMatrix.configuration.serialJtechHdmiMatrixConfiguration import SerialJtechHdmiMatrixConfiguration
 from jtechHdmiMatrix.service.absJtechHdmiMatrixService import AbsJtechHdmiMatrixService
 from retroTink.retroTinkConfiguration import RetroTinkConfiguration
@@ -27,7 +27,7 @@ class SerialJtechHdmiMatrixService(AbsJtechHdmiMatrixService):
 
     def applyConfiguration(
         self,
-        consoleConfiguration: AbsConsoleConfiguration,
+        consoleConfiguration: ConsoleConfiguration,
     ):
         try:
             with serial.Serial(
@@ -45,7 +45,7 @@ class SerialJtechHdmiMatrixService(AbsJtechHdmiMatrixService):
 
     def __applyConfiguration(
         self,
-        consoleConfiguration: AbsConsoleConfiguration,
+        consoleConfiguration: ConsoleConfiguration,
         serialConnection: serial.Serial,
     ):
         serialCommand = f'@T {4:02}'

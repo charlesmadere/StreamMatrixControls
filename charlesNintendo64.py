@@ -1,7 +1,7 @@
 from applyConfiguration import applyConfiguration
-from consoles.absConsoleConfiguration import AbsConsoleConfiguration
+from consoles.consoleConfiguration import ConsoleConfiguration
 from consoles.nintendo64Configuration import Nintendo64Configuration
 
 
-consoleConfiguration: AbsConsoleConfiguration = Nintendo64Configuration()
+consoleConfiguration: ConsoleConfiguration = Nintendo64Configuration()
 applyConfiguration(consoleConfiguration)

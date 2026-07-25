@@ -1,7 +1,7 @@
 from applyConfiguration import applyConfiguration
-from consoles.absConsoleConfiguration import AbsConsoleConfiguration
+from consoles.consoleConfiguration import ConsoleConfiguration
 from consoles.superFamicomConfiguration import SuperFamicomConfiguration
 
 
-consoleConfiguration: AbsConsoleConfiguration = SuperFamicomConfiguration()
+consoleConfiguration: ConsoleConfiguration = SuperFamicomConfiguration()
 applyConfiguration(consoleConfiguration)

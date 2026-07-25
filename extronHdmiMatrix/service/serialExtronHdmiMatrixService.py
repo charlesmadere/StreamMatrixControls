@@ -3,7 +3,7 @@ from typing import Final
 
 import serial
 
-from consoles.absConsoleConfiguration import AbsConsoleConfiguration
+from consoles.consoleConfiguration import ConsoleConfiguration
 from extronHdmiMatrix.configuration.serialExtronHdmiMatrixConfiguration import SerialExtronHdmiMatrixConfiguration
 from extronHdmiMatrix.service.absExtronHdmiMatrixService import AbsExtronHdmiMatrixService
 
@@ -24,7 +24,7 @@ class SerialExtronHdmiMatrixService(AbsExtronHdmiMatrixService):
 
     def applyConfiguration(
         self,
-        consoleConfiguration: AbsConsoleConfiguration,
+        consoleConfiguration: ConsoleConfiguration,
     ):
         try:
             with serial.Serial(
@@ -42,7 +42,7 @@ class SerialExtronHdmiMatrixService(AbsExtronHdmiMatrixService):
 
     def __applyConfiguration(
         self,
-        consoleConfiguration: AbsConsoleConfiguration,
+        consoleConfiguration: ConsoleConfiguration,
         serialConnection: serial.Serial,
     ):
         serialCommand = f'{consoleConfiguration.extronHdmiPreset}.'

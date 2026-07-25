@@ -1,7 +1,7 @@
 from applyConfiguration import applyConfiguration
-from consoles.absConsoleConfiguration import AbsConsoleConfiguration
+from consoles.consoleConfiguration import ConsoleConfiguration
 from consoles.sonyPs1Configuration import SonyPs1Configuration
 
 
-consoleConfiguration: AbsConsoleConfiguration = SonyPs1Configuration()
+consoleConfiguration: ConsoleConfiguration = SonyPs1Configuration()
 applyConfiguration(consoleConfiguration)

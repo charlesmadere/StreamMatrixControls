@@ -5,7 +5,7 @@ from typing import Any, Final
 
 import requests
 
-from consoles.absConsoleConfiguration import AbsConsoleConfiguration
+from consoles.consoleConfiguration import ConsoleConfiguration
 from jtechHdmiMatrix.configuration.networkJtechHdmiMatrixConfiguration import NetworkJtechHdmiMatrixConfiguration
 from jtechHdmiMatrix.service.absJtechHdmiMatrixService import AbsJtechHdmiMatrixService
 from retroTink.retroTinkConfiguration import RetroTinkConfiguration
@@ -27,7 +27,7 @@ class NetworkJtechHdmiMatrixService(AbsJtechHdmiMatrixService):
 
     def applyConfiguration(
         self,
-        consoleConfiguration: AbsConsoleConfiguration,
+        consoleConfiguration: ConsoleConfiguration,
     ):
         try:
             for portIndex in range(self.__configuration.portCount):
@@ -62,7 +62,7 @@ class NetworkJtechHdmiMatrixService(AbsJtechHdmiMatrixService):
 
     def __buildUrl(
         self,
-        consoleConfiguration: AbsConsoleConfiguration,
+        consoleConfiguration: ConsoleConfiguration,
         portIndex: int,
     ) -> str:
         randomNumber = random.random()

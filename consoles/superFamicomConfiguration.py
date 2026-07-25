@@ -1,11 +1,11 @@
 from dataclasses import dataclass
 
-from consoles.absConsoleConfiguration import AbsConsoleConfiguration
+from consoles.consoleConfiguration import ConsoleConfiguration
 from consoles.whichConsole import WhichConsole
 
 
 @dataclass(frozen = True, slots = True)
-class SuperFamicomConfiguration(AbsConsoleConfiguration):
+class SuperFamicomConfiguration(ConsoleConfiguration):
 
     @property
     def extronHdmiPreset(self) -> int:

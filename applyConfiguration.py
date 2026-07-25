@@ -1,4 +1,4 @@
-from consoles.absConsoleConfiguration import AbsConsoleConfiguration
+from consoles.consoleConfiguration import ConsoleConfiguration
 from extronVgaMatrix.configuration.serialExtronVgaMatrixConfiguration import SerialExtronVgaMatrixConfiguration
 from extronVgaMatrix.service.absExtronVgaMatrixService import AbsExtronVgaMatrixService
 from extronVgaMatrix.service.serialExtronVgaMatrixService import SerialExtronVgaMatrixService
@@ -23,7 +23,7 @@ jtechHdmiMatrixService: AbsJtechHdmiMatrixService = SerialJtechHdmiMatrixService
     retroTinkConfiguration = retroTinkConfiguration,
 )
 
-def applyConfiguration(consoleConfiguration: AbsConsoleConfiguration):
+def applyConfiguration(consoleConfiguration: ConsoleConfiguration):
     extronVgaMatrixService.applyConfiguration(consoleConfiguration)
     jtechHdmiMatrixService.applyConfiguration(consoleConfiguration)
     print(f'Finished applying console configuration ({consoleConfiguration=})')

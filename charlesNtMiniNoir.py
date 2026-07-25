@@ -1,7 +1,7 @@
 from applyConfiguration import applyConfiguration
-from consoles.absConsoleConfiguration import AbsConsoleConfiguration
+from consoles.consoleConfiguration import ConsoleConfiguration
 from consoles.ntMiniNoirConfiguration import NtMiniNoirConfiguration
 
 
-consoleConfiguration: AbsConsoleConfiguration = NtMiniNoirConfiguration()
+consoleConfiguration: ConsoleConfiguration = NtMiniNoirConfiguration()
 applyConfiguration(consoleConfiguration)

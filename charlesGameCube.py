@@ -1,7 +1,7 @@
 from applyConfiguration import applyConfiguration
-from consoles.absConsoleConfiguration import AbsConsoleConfiguration
+from consoles.consoleConfiguration import ConsoleConfiguration
 from consoles.gameCubeConfiguration import GameCubeConfiguration
 
 
-consoleConfiguration: AbsConsoleConfiguration = GameCubeConfiguration()
+consoleConfiguration: ConsoleConfiguration = GameCubeConfiguration()
 applyConfiguration(consoleConfiguration)

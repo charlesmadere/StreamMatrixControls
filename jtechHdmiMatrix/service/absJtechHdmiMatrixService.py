@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-from consoles.absConsoleConfiguration import AbsConsoleConfiguration
+from consoles.consoleConfiguration import ConsoleConfiguration
 
 
 class AbsJtechHdmiMatrixService(ABC):
@@ -8,6 +8,6 @@ class AbsJtechHdmiMatrixService(ABC):
     @abstractmethod
     def applyConfiguration(
         self,
-        consoleConfiguration: AbsConsoleConfiguration,
+        consoleConfiguration: ConsoleConfiguration,
     ):
         pass

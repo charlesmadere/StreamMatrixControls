@@ -3,7 +3,7 @@ from abc import ABC, abstractmethod
 from consoles.whichConsole import WhichConsole
 
 
-class AbsConsoleConfiguration(ABC):
+class ConsoleConfiguration(ABC):
 
     @property
     @abstractmethod

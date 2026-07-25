@@ -1,7 +1,7 @@
 from applyConfiguration import applyConfiguration
-from consoles.absConsoleConfiguration import AbsConsoleConfiguration
+from consoles.consoleConfiguration import ConsoleConfiguration
 from consoles.megaSgConfiguration import MegaSgConfiguration
 
 
-consoleConfiguration: AbsConsoleConfiguration = MegaSgConfiguration()
+consoleConfiguration: ConsoleConfiguration = MegaSgConfiguration()
 applyConfiguration(consoleConfiguration)

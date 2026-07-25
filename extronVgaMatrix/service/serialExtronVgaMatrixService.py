@@ -3,7 +3,7 @@ from typing import Final
 
 import serial
 
-from consoles.absConsoleConfiguration import AbsConsoleConfiguration
+from consoles.consoleConfiguration import ConsoleConfiguration
 from extronVgaMatrix.configuration.serialExtronVgaMatrixConfiguration import SerialExtronVgaMatrixConfiguration
 from extronVgaMatrix.service.absExtronVgaMatrixService import AbsExtronVgaMatrixService
 
@@ -24,7 +24,7 @@ class SerialExtronVgaMatrixService(AbsExtronVgaMatrixService):
 
     def applyConfiguration(
         self,
-        consoleConfiguration: AbsConsoleConfiguration,
+        consoleConfiguration: ConsoleConfiguration,
     ):
         try:
             with serial.Serial(
@@ -42,7 +42,7 @@ class SerialExtronVgaMatrixService(AbsExtronVgaMatrixService):
 
     def __applyConfiguration(
         self,
-        consoleConfiguration: AbsConsoleConfiguration,
+        consoleConfiguration: ConsoleConfiguration,
         serialConnection: serial.Serial,
     ):
         serialCommand = f'{consoleConfiguration.extronVgaPreset}.'

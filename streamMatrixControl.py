@@ -3,7 +3,7 @@ import sys
 from typing import Any
 
 from applyConfiguration import applyConfiguration
-from consoles.absConsoleConfiguration import AbsConsoleConfiguration
+from consoles.consoleConfiguration import ConsoleConfiguration
 from consoles.gameCubeConfiguration import GameCubeConfiguration
 from consoles.megaSgConfiguration import MegaSgConfiguration
 from consoles.nintendo64Configuration import Nintendo64Configuration
@@ -13,7 +13,7 @@ from consoles.sonyPs3Configuration import SonyPs3Configuration
 from consoles.superFamicomConfiguration import SuperFamicomConfiguration
 
 
-def determineConsoleConfiguration(consoleArgument: str) -> AbsConsoleConfiguration | None:
+def determineConsoleConfiguration(consoleArgument: str) -> ConsoleConfiguration | None:
     if re.fullmatch(r'^\s*game(?:\s+|_|-)?cube\s*$', consoleArgument, re.IGNORECASE):
         return GameCubeConfiguration()
 
