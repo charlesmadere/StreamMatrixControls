@@ -1,29 +1,30 @@
+from typing import Final
+
 from consoles.consoleConfiguration import ConsoleConfiguration
+from extronHdmiMatrix.configuration.serialExtronHdmiMatrixConfiguration import SerialExtronHdmiMatrixConfiguration
+from extronHdmiMatrix.service.absExtronHdmiMatrixService import AbsExtronHdmiMatrixService
+from extronHdmiMatrix.service.serialExtronHdmiMatrixService import SerialExtronHdmiMatrixService
 from extronVgaMatrix.configuration.serialExtronVgaMatrixConfiguration import SerialExtronVgaMatrixConfiguration
 from extronVgaMatrix.service.absExtronVgaMatrixService import AbsExtronVgaMatrixService
 from extronVgaMatrix.service.serialExtronVgaMatrixService import SerialExtronVgaMatrixService
-from jtechHdmiMatrix.configuration.serialJtechHdmiMatrixConfiguration import SerialJtechHdmiMatrixConfiguration
-from jtechHdmiMatrix.service.absJtechHdmiMatrixService import AbsJtechHdmiMatrixService
-from jtechHdmiMatrix.service.serialJtechHdmiMatrixService import SerialJtechHdmiMatrixService
 from retroTink.retroTinkConfiguration import RetroTinkConfiguration
 
 
 extronVgaMatrixConfiguration = SerialExtronVgaMatrixConfiguration()
 
-extronVgaMatrixService: AbsExtronVgaMatrixService = SerialExtronVgaMatrixService(
+extronVgaMatrixService: Final[AbsExtronVgaMatrixService] = SerialExtronVgaMatrixService(
     configuration = extronVgaMatrixConfiguration,
 )
 
 retroTinkConfiguration = RetroTinkConfiguration()
 
-jtechHdmiMatrixConfiguration = SerialJtechHdmiMatrixConfiguration()
+extronHdmiMatrixConfiguration = SerialExtronHdmiMatrixConfiguration()
 
-jtechHdmiMatrixService: AbsJtechHdmiMatrixService = SerialJtechHdmiMatrixService(
-    configuration = jtechHdmiMatrixConfiguration,
-    retroTinkConfiguration = retroTinkConfiguration,
+extronHdmiMatrixService: Final[AbsExtronHdmiMatrixService] = SerialExtronHdmiMatrixService(
+    configuration = extronHdmiMatrixConfiguration,
 )
 
 def applyConfiguration(consoleConfiguration: ConsoleConfiguration):
     extronVgaMatrixService.applyConfiguration(consoleConfiguration)
-    jtechHdmiMatrixService.applyConfiguration(consoleConfiguration)
+    extronHdmiMatrixService.applyConfiguration(consoleConfiguration)
     print(f'Finished applying console configuration ({consoleConfiguration=})')

@@ -2,7 +2,7 @@ import re
 import sys
 from typing import Any
 
-from applyConfiguration import applyConfiguration
+from charlesApplyConfiguration import applyConfiguration
 from consoles.consoleConfiguration import ConsoleConfiguration
 from consoles.gameCubeConfiguration import GameCubeConfiguration
 from consoles.megaSgConfiguration import MegaSgConfiguration

@@ -1,4 +1,4 @@
-from applyConfiguration import applyConfiguration
+from charlesApplyConfiguration import applyConfiguration
 from consoles.consoleConfiguration import ConsoleConfiguration
 from consoles.sonyPs3Configuration import SonyPs3Configuration
 

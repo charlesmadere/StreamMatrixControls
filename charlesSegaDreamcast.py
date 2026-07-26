@@ -1,4 +1,4 @@
-from applyConfiguration import applyConfiguration
+from charlesApplyConfiguration import applyConfiguration
 from consoles.consoleConfiguration import ConsoleConfiguration
 from consoles.segaDreamcastConfiguration import SegaDreamcastConfiguration
 
