@@ -4,6 +4,7 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
+pyinstaller = "6.21.0"
 pyserial = "3.5"
 requests = "2.34.2"
 
