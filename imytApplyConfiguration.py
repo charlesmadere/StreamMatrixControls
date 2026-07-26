@@ -10,7 +10,9 @@ from extronVgaMatrix.service.serialExtronVgaMatrixService import SerialExtronVga
 from retroTink.retroTinkConfiguration import RetroTinkConfiguration
 
 
-extronVgaMatrixConfiguration = SerialExtronVgaMatrixConfiguration()
+extronVgaMatrixConfiguration = SerialExtronVgaMatrixConfiguration(
+    comPort = 'COM5',
+)
 
 extronVgaMatrixService: Final[AbsExtronVgaMatrixService] = SerialExtronVgaMatrixService(
     configuration = extronVgaMatrixConfiguration,

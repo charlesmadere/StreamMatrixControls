@@ -5,5 +5,8 @@ from extronVgaMatrix.configuration.absExtronVgaMatrixConfiguration import AbsExt
 
 @dataclass(frozen = True, slots = True)
 class SerialExtronVgaMatrixConfiguration(AbsExtronVgaMatrixConfiguration):
-    baudRate: int = 9600
-    comPort: str = 'COM9'
+    comPort: str
+
+    @property
+    def baudRate(self) -> int:
+        return 9600

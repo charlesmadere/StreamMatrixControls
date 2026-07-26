@@ -10,7 +10,9 @@ from jtechHdmiMatrix.service.serialJtechHdmiMatrixService import SerialJtechHdmi
 from retroTink.retroTinkConfiguration import RetroTinkConfiguration
 
 
-extronVgaMatrixConfiguration = SerialExtronVgaMatrixConfiguration()
+extronVgaMatrixConfiguration = SerialExtronVgaMatrixConfiguration(
+    comPort = 'COM9',
+)
 
 extronVgaMatrixService: Final[AbsExtronVgaMatrixService] = SerialExtronVgaMatrixService(
     configuration = extronVgaMatrixConfiguration,
