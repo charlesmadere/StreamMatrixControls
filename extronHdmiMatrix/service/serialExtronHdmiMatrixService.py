@@ -1,3 +1,4 @@
+import socket
 import time
 from typing import Final
 
@@ -27,14 +28,11 @@ class SerialExtronHdmiMatrixService(AbsExtronHdmiMatrixService):
         consoleConfiguration: ConsoleConfiguration,
     ):
         try:
-            with serial.Serial(
-                port = self.__configuration.comPort,
-                baudrate = self.__configuration.baudRate,
-                timeout = self.__timeoutDurationSeconds,
-            ) as serialConnection:
+            with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as socketConnection:
+                socketConnection.connect(('192.168.1.249', 23))
                 self.__applyConfiguration(
                     consoleConfiguration = consoleConfiguration,
-                    serialConnection = serialConnection,
+                    socketConnection = socketConnection,
                 )
         except Exception as e:
             print(f'Extron HDMI Matrix connection error ({self.__configuration=}) ({consoleConfiguration=}):', e)
@@ -43,18 +41,19 @@ class SerialExtronHdmiMatrixService(AbsExtronHdmiMatrixService):
     def __applyConfiguration(
         self,
         consoleConfiguration: ConsoleConfiguration,
-        serialConnection: serial.Serial,
+        socketConnection: socket.socket,
     ):
-        serialCommand = f'{consoleConfiguration.extronHdmiPreset}.'
-        serialConnection.write(serialCommand.encode('utf-8') + b'\r')
+        # 1. Appended \r to act as an "Enter" key for the command parser
+        ipCommand = f'{consoleConfiguration.extronHdmiPreset}.\r'
 
-        # wait a moment for the HDMI Matrix to process
-        time.sleep(self.__sleepDurationSeconds)
+        # 2. Use sendall() for TCP sockets instead of write()
+        socketConnection.sendall(ipCommand.encode('ascii'))
 
-        # read some of the response bytes
-        responseBytes = serialConnection.read(self.__readBytes)
+        # 3. Use recv() to read the response buffer.
+        # This will block until the matrix replies or the socket times out.
+        responseBytes = socketConnection.recv(1024)
 
-        # decode the response for readability and logging
-        response = responseBytes.decode(encoding = 'utf-8', errors = 'ignore')
+        # 4. Decode and strip whitespace/newlines for logging
+        response = responseBytes.decode(encoding = 'ascii', errors = 'ignore').strip()
 
-        print(f'Extron HDMI Matrix response ({consoleConfiguration=}) ({serialCommand=}) ({response=})')
+        print(f'Extron HDMI Matrix response ({consoleConfiguration=}) ({ipCommand=}) ({response=})')
