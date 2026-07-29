@@ -1,9 +1,9 @@
 from typing import Final
 
 from consoles.consoleConfiguration import ConsoleConfiguration
-from extronHdmiMatrix.configuration.serialExtronHdmiMatrixConfiguration import SerialExtronHdmiMatrixConfiguration
+from extronHdmiMatrix.configuration.networkExtronHdmiMatrixConfiguration import NetworkExtronHdmiMatrixConfiguration
 from extronHdmiMatrix.service.absExtronHdmiMatrixService import AbsExtronHdmiMatrixService
-from extronHdmiMatrix.service.serialExtronHdmiMatrixService import SerialExtronHdmiMatrixService
+from extronHdmiMatrix.service.networkExtronHdmiMatrixService import NetworkExtronHdmiMatrixService
 from extronVgaMatrix.configuration.serialExtronVgaMatrixConfiguration import SerialExtronVgaMatrixConfiguration
 from extronVgaMatrix.service.absExtronVgaMatrixService import AbsExtronVgaMatrixService
 from extronVgaMatrix.service.serialExtronVgaMatrixService import SerialExtronVgaMatrixService
@@ -20,9 +20,9 @@ extronVgaMatrixService: Final[AbsExtronVgaMatrixService] = SerialExtronVgaMatrix
 
 retroTinkConfiguration = RetroTinkConfiguration()
 
-extronHdmiMatrixConfiguration = SerialExtronHdmiMatrixConfiguration()
+extronHdmiMatrixConfiguration = NetworkExtronHdmiMatrixConfiguration()
 
-extronHdmiMatrixService: Final[AbsExtronHdmiMatrixService] = SerialExtronHdmiMatrixService(
+extronHdmiMatrixService: Final[AbsExtronHdmiMatrixService] = NetworkExtronHdmiMatrixService(
     configuration = extronHdmiMatrixConfiguration,
 )
 

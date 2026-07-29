@@ -1,24 +1,21 @@
 import socket
-import time
 from typing import Final
 
-import serial
-
 from consoles.consoleConfiguration import ConsoleConfiguration
-from extronHdmiMatrix.configuration.serialExtronHdmiMatrixConfiguration import SerialExtronHdmiMatrixConfiguration
+from extronHdmiMatrix.configuration.networkExtronHdmiMatrixConfiguration import NetworkExtronHdmiMatrixConfiguration
 from extronHdmiMatrix.service.absExtronHdmiMatrixService import AbsExtronHdmiMatrixService
 
 
-class SerialExtronHdmiMatrixService(AbsExtronHdmiMatrixService):
+class NetworkExtronHdmiMatrixService(AbsExtronHdmiMatrixService):
 
     def __init__(
         self,
-        configuration: SerialExtronHdmiMatrixConfiguration,
+        configuration: NetworkExtronHdmiMatrixConfiguration,
         sleepDurationSeconds: float = 0.25,
         timeoutDurationSeconds: float = 1.0,
-        readBytes: int = 100,
+        readBytes: int = 1024,
     ):
-        self.__configuration: Final[SerialExtronHdmiMatrixConfiguration] = configuration
+        self.__configuration: Final[NetworkExtronHdmiMatrixConfiguration] = configuration
         self.__sleepDurationSeconds: Final[float] = sleepDurationSeconds
         self.__timeoutDurationSeconds: Final[float] = timeoutDurationSeconds
         self.__readBytes: Final[int] = readBytes
@@ -29,7 +26,7 @@ class SerialExtronHdmiMatrixService(AbsExtronHdmiMatrixService):
     ):
         try:
             with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as socketConnection:
-                socketConnection.connect(('192.168.1.249', 23))
+                socketConnection.connect((self.__configuration.ipAddress, self.__configuration.port))
                 self.__applyConfiguration(
                     consoleConfiguration = consoleConfiguration,
                     socketConnection = socketConnection,
@@ -51,7 +48,7 @@ class SerialExtronHdmiMatrixService(AbsExtronHdmiMatrixService):
 
         # 3. Use recv() to read the response buffer.
         # This will block until the matrix replies or the socket times out.
-        responseBytes = socketConnection.recv(1024)
+        responseBytes = socketConnection.recv(self.__readBytes)
 
         # 4. Decode and strip whitespace/newlines for logging
         response = responseBytes.decode(encoding = 'ascii', errors = 'ignore').strip()
