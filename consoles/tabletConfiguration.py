@@ -17,7 +17,7 @@ class TabletConfiguration(ConsoleConfiguration):
 
     @property
     def jtechHdmiPort(self) -> int:
-        return 8
+        return 5
 
     @property
     def usesRetroTinkPassThrough(self) -> bool:
