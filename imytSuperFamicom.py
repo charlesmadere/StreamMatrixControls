@@ -1,3 +1,4 @@
+from dataclasses import dataclass
 from typing import Final
 
 from consoles.consoleConfiguration import ConsoleConfiguration
@@ -5,6 +6,7 @@ from consoles.whichConsole import WhichConsole
 from imytApplyConfiguration import applyConfiguration
 
 
+@dataclass(frozen = True, slots = True)
 class SuperFamicomConfiguration(ConsoleConfiguration):
 
     @property
