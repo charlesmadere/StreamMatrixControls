@@ -1,3 +1,5 @@
+from typing import Final
+
 from consoles.consoleConfiguration import ConsoleConfiguration
 from consoles.whichConsole import WhichConsole
 from imytApplyConfiguration import applyConfiguration
@@ -25,5 +27,5 @@ class MegaSgConfiguration(ConsoleConfiguration):
     def whichConsole(self) -> WhichConsole:
         return WhichConsole.MEGA_SG
 
-consoleConfiguration: ConsoleConfiguration = MegaSgConfiguration()
+consoleConfiguration: Final[ConsoleConfiguration] = MegaSgConfiguration()
 applyConfiguration(consoleConfiguration)

@@ -1,3 +1,5 @@
+from typing import Final
+
 from consoles.consoleConfiguration import ConsoleConfiguration
 from consoles.whichConsole import WhichConsole
 from imytApplyConfiguration import applyConfiguration
@@ -25,5 +27,5 @@ class SuperFamicomConfiguration(ConsoleConfiguration):
     def whichConsole(self) -> WhichConsole:
         return WhichConsole.SUPER_FAMICOM
 
-consoleConfiguration: ConsoleConfiguration = SuperFamicomConfiguration()
+consoleConfiguration: Final[ConsoleConfiguration] = SuperFamicomConfiguration()
 applyConfiguration(consoleConfiguration)

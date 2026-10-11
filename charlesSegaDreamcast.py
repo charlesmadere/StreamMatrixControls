@@ -1,7 +1,8 @@
+from typing import Final
+
 from charlesApplyConfiguration import applyConfiguration
 from consoles.consoleConfiguration import ConsoleConfiguration
 from consoles.segaDreamcastConfiguration import SegaDreamcastConfiguration
 
-
-consoleConfiguration: ConsoleConfiguration = SegaDreamcastConfiguration()
+consoleConfiguration: Final[ConsoleConfiguration] = SegaDreamcastConfiguration()
 applyConfiguration(consoleConfiguration)

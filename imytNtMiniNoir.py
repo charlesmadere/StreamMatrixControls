@@ -1,3 +1,5 @@
+from typing import Final
+
 from consoles.consoleConfiguration import ConsoleConfiguration
 from consoles.whichConsole import WhichConsole
 from imytApplyConfiguration import applyConfiguration
@@ -25,5 +27,5 @@ class NtMiniNoirConfiguration(ConsoleConfiguration):
     def whichConsole(self) -> WhichConsole:
         return WhichConsole.NT_MINI_NOIR
 
-consoleConfiguration: ConsoleConfiguration = NtMiniNoirConfiguration()
+consoleConfiguration: Final[ConsoleConfiguration] = NtMiniNoirConfiguration()
 applyConfiguration(consoleConfiguration)

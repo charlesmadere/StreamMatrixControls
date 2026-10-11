@@ -1,7 +1,8 @@
+from typing import Final
+
 from charlesApplyConfiguration import applyConfiguration
 from consoles.consoleConfiguration import ConsoleConfiguration
 from consoles.nintendo64Configuration import Nintendo64Configuration
 
-
-consoleConfiguration: ConsoleConfiguration = Nintendo64Configuration()
+consoleConfiguration: Final[ConsoleConfiguration] = Nintendo64Configuration()
 applyConfiguration(consoleConfiguration)

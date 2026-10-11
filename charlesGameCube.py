@@ -1,7 +1,8 @@
+from typing import Final
+
 from charlesApplyConfiguration import applyConfiguration
 from consoles.consoleConfiguration import ConsoleConfiguration
 from consoles.gameCubeConfiguration import GameCubeConfiguration
 
-
-consoleConfiguration: ConsoleConfiguration = GameCubeConfiguration()
+consoleConfiguration: Final[ConsoleConfiguration] = GameCubeConfiguration()
 applyConfiguration(consoleConfiguration)

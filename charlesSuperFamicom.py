@@ -1,7 +1,8 @@
+from typing import Final
+
 from charlesApplyConfiguration import applyConfiguration
 from consoles.consoleConfiguration import ConsoleConfiguration
 from consoles.superFamicomConfiguration import SuperFamicomConfiguration
 
-
-consoleConfiguration: ConsoleConfiguration = SuperFamicomConfiguration()
+consoleConfiguration: Final[ConsoleConfiguration] = SuperFamicomConfiguration()
 applyConfiguration(consoleConfiguration)

@@ -1,7 +1,8 @@
+from typing import Final
+
 from charlesApplyConfiguration import applyConfiguration
 from consoles.consoleConfiguration import ConsoleConfiguration
 from consoles.ntMiniNoirConfiguration import NtMiniNoirConfiguration
 
-
-consoleConfiguration: ConsoleConfiguration = NtMiniNoirConfiguration()
+consoleConfiguration: Final[ConsoleConfiguration] = NtMiniNoirConfiguration()
 applyConfiguration(consoleConfiguration)
