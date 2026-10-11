@@ -11,3 +11,4 @@ class WhichConsole(Enum):
     SONY_PS1 = auto()
     SONY_PS3 = auto()
     SUPER_FAMICOM = auto()
+    TABLET = auto()
