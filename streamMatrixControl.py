@@ -2,7 +2,7 @@ import re
 import sys
 from typing import Any
 
-from charlesApplyConfiguration import applyConfiguration
+from charlyApplyConfiguration import applyConfiguration
 from consoles.consoleConfiguration import ConsoleConfiguration
 from consoles.gameCubeConfiguration import GameCubeConfiguration
 from consoles.megaSgConfiguration import MegaSgConfiguration
@@ -11,6 +11,7 @@ from consoles.ntMiniNoirConfiguration import NtMiniNoirConfiguration
 from consoles.sonyPs1Configuration import SonyPs1Configuration
 from consoles.sonyPs3Configuration import SonyPs3Configuration
 from consoles.superFamicomConfiguration import SuperFamicomConfiguration
+from consoles.switch2Configuration import Switch2Configuration
 
 
 def determineConsoleConfiguration(consoleArgument: str) -> ConsoleConfiguration | None:
@@ -34,6 +35,9 @@ def determineConsoleConfiguration(consoleArgument: str) -> ConsoleConfiguration 
 
     elif re.fullmatch(r'^\s*super(?:\s+|_|-)?famicom\s*$', consoleArgument, re.IGNORECASE):
         return SuperFamicomConfiguration()
+
+    elif re.fullmatch(r'^\s*switch(?:\s+|_|-)?2\s*$', consoleArgument, re.IGNORECASE):
+        return Switch2Configuration()
 
     else:
         return None
