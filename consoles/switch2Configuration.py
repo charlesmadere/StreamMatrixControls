@@ -17,7 +17,7 @@ class Switch2Configuration(ConsoleConfiguration):
 
     @property
     def jtechHdmiPort(self) -> int:
-        return 4
+        return 6
 
     @property
     def usesRetroTinkPassThrough(self) -> bool:
