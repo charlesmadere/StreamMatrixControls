@@ -21,7 +21,7 @@ class Switch2Configuration(ConsoleConfiguration):
 
     @property
     def usesRetroTinkPassThrough(self) -> bool:
-        return False
+        return True
 
     @property
     def whichConsole(self) -> WhichConsole:
